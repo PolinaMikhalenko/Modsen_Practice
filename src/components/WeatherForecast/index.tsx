@@ -1,24 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as Styled from './styled';
-import { WeatherInfo } from './WeatherInfo';
+import { DailyForecast } from './DailyForecast';
+import { HourlyForecast } from './HourlyForecast';
 
 export function WeatherForecast() {
+  const [dailyForecast, setDailyForecast] = useState(true);
+
+  const handleClickOfDaysButton = () => {
+    setDailyForecast(true);
+  };
+
+  const handleClickOfHoursButton = () => {
+    setDailyForecast(false);
+  };
+
+  const forecast = dailyForecast ? <DailyForecast /> : <HourlyForecast />;
   return (
     <Styled.WeatherForecast>
       <Styled.ButtonsSection>
-        <Styled.Button active>DAYS</Styled.Button>
-        <Styled.Button>HOURS</Styled.Button>
+        <Styled.Button onClick={handleClickOfDaysButton}>DAYS</Styled.Button>
+        <Styled.Button light onClick={handleClickOfHoursButton}>
+          HOURS
+        </Styled.Button>
       </Styled.ButtonsSection>
-
-      <Styled.ForecastSection>
-        <WeatherInfo weekDay="Su" temperature={20} />
-        <WeatherInfo weekDay="Mo" temperature={20} />
-        <WeatherInfo weekDay="Tu" temperature={20} />
-        <WeatherInfo weekDay="We" temperature={20} />
-        <WeatherInfo weekDay="Th" temperature={20} />
-        <WeatherInfo weekDay="Fr" temperature={20} />
-        <WeatherInfo weekDay="Sa" temperature={20} />
-      </Styled.ForecastSection>
+      {forecast}
     </Styled.WeatherForecast>
   );
 }

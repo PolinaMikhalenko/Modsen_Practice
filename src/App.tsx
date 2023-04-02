@@ -5,6 +5,7 @@ import { baseTheme } from './styles/theme';
 import { StyledFlexRow, StyledScrollSection } from './styles/components';
 import { AppLayout } from './layouts/AppLayout';
 import { CurrentDateTime } from './components/CurrentDateTime';
+import { CitySelector } from './components/CitySelector';
 import { WeatherForecast } from './components/WeatherForecast';
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
       <AppLayout>
         <StyledFlexRow>
           <CurrentDateTime />
-          <div>City</div>
+          <CitySelector />
         </StyledFlexRow>
         <StyledFlexRow>
           <StyledScrollSection>

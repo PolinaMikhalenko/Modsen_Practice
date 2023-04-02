@@ -4,7 +4,7 @@ export function getWeekDay(date: Date) {
     'Monday',
     'Tuesday',
     'Wednesday',
-    'Thursday ',
+    'Thursday',
     'Friday',
     'Saturday',
   ];
