@@ -8,6 +8,7 @@ export interface ITheme {
 
   fontSizes: {
     regular: number;
+    small: number;
     title: number;
     subtitle: number;
     button: number;
