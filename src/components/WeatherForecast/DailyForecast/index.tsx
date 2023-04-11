@@ -4,7 +4,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import { WeatherInfo } from '../WeatherInfo/index';
 import { RootState } from '../../../store';
 import { StyledForecastSection } from '../../../styles/components';
-import { selectDailyWeatherForecast } from '../../../store/selectors/dailyWeatherForecastSelector';
+import { selectDailyWeatherForecast } from '../../../store/selectors/weatherSelectors';
 
 export function DailyForecast() {
   const daysWeather = useSelector((state: RootState) =>
