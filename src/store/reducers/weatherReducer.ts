@@ -1,42 +1,40 @@
 /* eslint-disable no-param-reassign */
 import { createReducer } from '@reduxjs/toolkit';
 import {
-  getDailyWeatherForecast,
-  getHourlyWeatherForecast,
+  getDailyWeatherForecastFulfilled,
+  getDailyWeatherForecastPending,
+  getHourlyWeatherForecastFulfilled,
   getSelectedLocation,
 } from '../actions/actionCreators';
 
-interface IDayWeather {
-  weekDay: string;
-  icon: string;
-  temperature: number;
-}
+import {
+  IDailyForecastApiResponse,
+  IHourlyForecastApiResponse,
+} from '../../interfaces/IForecastApiResponse';
 
 export interface IState {
   location: string;
-  daysWeather: Array<IDayWeather>;
+  daysWeather: IDailyForecastApiResponse | null;
+  hourlyWeather: IHourlyForecastApiResponse | null;
 }
 
 const initialState: IState = {
   location: '',
-  daysWeather: [
-    {
-      weekDay: 'Today',
-      icon: '',
-      temperature: 0,
-    },
-  ],
+  daysWeather: null,
+  hourlyWeather: null,
 };
 
 export const weatherReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(getDailyWeatherForecast, (state) => {
-      state.daysWeather = [];
+    .addCase(getDailyWeatherForecastPending, () => {})
+
+    .addCase(getDailyWeatherForecastFulfilled, (state, action) => {
+      state.daysWeather = action.payload;
     })
-    .addCase(getHourlyWeatherForecast, (state) => {
-      state.daysWeather = [];
+    .addCase(getHourlyWeatherForecastFulfilled, (state, action) => {
+      state.hourlyWeather = action.payload;
     })
-    .addCase(getSelectedLocation, (state, action) => {
-      state.location += action.payload;
+    .addCase(getSelectedLocation, (state) => {
+      state.location = '';
     });
 });
