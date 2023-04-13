@@ -18,6 +18,7 @@ export const StyledScrollSection = styled.section`
 
 export type StyledForecastSectionProps = {
   light?: boolean;
+  column?: boolean;
 };
 
 export const StyledForecastSection = styled.div<StyledForecastSectionProps>`
@@ -29,6 +30,7 @@ export const StyledForecastSection = styled.div<StyledForecastSectionProps>`
     light ? theme.colors.transparentWhite : theme.colors.transparentDark};
   color: ${({ light, theme }) => (light ? 'black' : theme.colors.white)};
   display: flex;
+  flex-direction: ${({ column }) => (column ? 'column' : 'row')};
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -39,8 +41,9 @@ export const StyledForecastSection = styled.div<StyledForecastSectionProps>`
 `;
 
 export const StyledWeatherInfo = styled.div`
-  padding: 0 1rem;
+  padding: 1.3rem;
   text-align: center;
+  border-radius: 1rem;
 `;
 
 export const StyledDiv = styled.div`
