@@ -1,6 +1,9 @@
-import { IDailyForecastApiResponse } from '../interfaces/IForecastApiResponse';
+import {
+  IDailyForecastApiResponse,
+  IHourlyForecastApiResponse,
+} from '../interfaces/IForecastApiResponse';
 
-export const getForecast = async ({
+export const getDailyForecast = async ({
   latitude,
   longitude,
 }: {
@@ -12,4 +15,18 @@ export const getForecast = async ({
   );
 
   return response.json().then((data) => data as IDailyForecastApiResponse);
+};
+
+export const getHourlyForecast = async ({
+  latitude,
+  longitude,
+}: {
+  latitude: number;
+  longitude: number;
+}): Promise<IHourlyForecastApiResponse> => {
+  const response = await fetch(
+    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,weathercode`
+  );
+
+  return response.json().then((data) => data as IHourlyForecastApiResponse);
 };
