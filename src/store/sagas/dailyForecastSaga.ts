@@ -6,7 +6,7 @@ import {
   put,
   takeEvery,
 } from 'redux-saga/effects';
-import { getForecast } from '../../api/weatherAPI';
+import { getDailyForecast } from '../../api/weatherAPI';
 import {
   getDailyWeatherForecastPending,
   getDailyWeatherForecastFulfilled,
@@ -17,7 +17,7 @@ export function* fetchDailyForecast(
   action: PayloadAction<{ latitude: number; longitude: number }>
 ): Generator<CallEffect | PutEffect, void, IDailyForecastApiResponse> {
   const dailyForecast: IDailyForecastApiResponse = yield call(
-    getForecast,
+    getDailyForecast,
     action.payload
   );
 
