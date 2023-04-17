@@ -5,15 +5,19 @@ export const StyledFlexRow = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 0 2rem 1rem;
-  height: 25%;
   @media ${({ theme }) => theme.device.tablet} {
     flex-direction: column;
   }
 `;
 
 export const StyledScrollSection = styled.section`
-  overflow-y: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  overflow-x: auto;
   padding-right: 1rem;
+  max-height: 25vh;
 `;
 
 export type StyledForecastSectionProps = {
@@ -30,22 +34,11 @@ export const StyledForecastSection = styled.div<StyledForecastSectionProps>`
     light ? theme.colors.transparentWhite : theme.colors.transparentDark};
   color: ${({ light, theme }) => (light ? 'black' : theme.colors.white)};
   display: flex;
-  flex-direction: ${({ column }) => (column ? 'column' : 'row')};
   align-items: center;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
+  overflow-x: auto;
   @media ${({ theme }) => theme.device.mobileL} {
     flex-direction: column;
     align-items: center;
   }
-`;
-
-export const StyledWeatherInfo = styled.div`
-  padding: 1.3rem;
-  text-align: center;
-  border-radius: 1rem;
-`;
-
-export const StyledDiv = styled.div`
-  margin: 0.5rem 0;
 `;

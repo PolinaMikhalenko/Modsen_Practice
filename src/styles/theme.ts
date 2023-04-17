@@ -14,15 +14,15 @@ export const baseTheme: ITheme = {
   colors: {
     white: '#fff',
     gray: '#888',
-    transparentWhite: '#ffffff50',
+    transparentWhite: '#ffffff70',
     transparentDark: '#23232390',
   },
 
   fontSizes: {
-    regular: 1.5,
-    small: 1.1,
-    title: 4,
-    subtitle: 2,
+    regular: 1.3,
+    small: 1,
+    title: 3.5,
+    subtitle: 1.6,
     button: 1.2,
   },
 
