@@ -1,15 +1,34 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const HourlyWeatherOfDay = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding-top: 1.5rem;
-`;
-
-export const HourlyWeatherSection = styled.div`
-  display: flex;
+const media = css`
   flex-direction: column;
   align-items: center;
-  padding: 1.5rem 0;
+`;
+
+export const HourlyForecastForDay = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1rem;
+  @media ${({ theme }) => theme.device.mobileL} {
+    ${media}
+  }
+`;
+
+export const HourlyForecastSection = styled.div`
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+
+  @media ${({ theme }) => theme.device.mobileL} {
+    ${media}
+  }
+`;
+
+export const Date = styled.span`
+  padding: 0 1.3rem;
+  font-weight: 500;
+  align-self: center;
+  white-space: normal;
+  text-align: center;
 `;

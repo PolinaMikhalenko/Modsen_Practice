@@ -6,44 +6,51 @@ import { RootState } from '../../../store';
 import { StyledForecastSection } from '../../../styles/components';
 import { selectHourlyWeatherForecast } from '../../../store/selectors/weatherSelectors';
 import * as Styled from './styled';
+import { IHourWeather } from '../../../interfaces/IHourWeather';
 
 export function HourlyForecast() {
-  const hourlyWeather = useSelector((state: RootState) =>
+  const hourlyWeatherForecast = useSelector((state: RootState) =>
     selectHourlyWeatherForecast(state)
   );
 
-  const days: JSX.Element[] = [];
-  const hourlyWeatherOfDay: JSX.Element[] = [];
-  let previousDate = '';
+  const dates = new Set(hourlyWeatherForecast.map(({ date }) => date));
+  const daysWithHourlyForecast: Map<string, Array<IHourWeather>> = new Map();
 
-  hourlyWeather.forEach((item) => {
-    if (previousDate === item.date) {
-      hourlyWeatherOfDay.push(
-        <WeatherInfo
-          timePeriod={item.time}
-          icon={item.icon}
-          weatherCondition={item.weatherCondition}
-          temperature={item.temperature}
-          key={nanoid()}
-        />
-      );
-    } else {
-      previousDate = item.date;
-      days.push(
-        <Styled.HourlyWeatherSection key={nanoid()}>
-          <b>{item.date}</b>
-          <Styled.HourlyWeatherOfDay>
-            {hourlyWeatherOfDay}
-          </Styled.HourlyWeatherOfDay>
-        </Styled.HourlyWeatherSection>
-      );
-      hourlyWeatherOfDay.length = 0;
-    }
+  dates.forEach((date) => {
+    const weather = hourlyWeatherForecast.filter((item) => item.date === date);
+    daysWithHourlyForecast.set(date, weather);
+  });
+
+  const hourlyForecast: JSX.Element[] = [];
+  dates.forEach((date) => {
+    const hourlyForecastForDay: JSX.Element[] = [];
+    daysWithHourlyForecast
+      .get(date)
+      ?.forEach(({ time, icon, weatherCondition, temperature }) => {
+        hourlyForecastForDay.push(
+          <WeatherInfo
+            timePeriod={time}
+            icon={icon}
+            weatherCondition={weatherCondition}
+            temperature={temperature}
+            key={nanoid()}
+          />
+        );
+      });
+
+    hourlyForecast.push(
+      <Styled.HourlyForecastForDay key={nanoid()}>
+        <Styled.Date>{date}</Styled.Date>
+        {hourlyForecastForDay}
+      </Styled.HourlyForecastForDay>
+    );
   });
 
   return (
-    <StyledForecastSection light column>
-      {days}
+    <StyledForecastSection light>
+      <Styled.HourlyForecastSection>
+        {hourlyForecast}
+      </Styled.HourlyForecastSection>
     </StyledForecastSection>
   );
 }
