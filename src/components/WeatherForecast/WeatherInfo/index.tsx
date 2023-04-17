@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledWeatherInfo, StyledDiv } from '../../../styles/components';
+import * as Styled from './styled';
 
 export type WeatherInfoProps = {
   timePeriod: string;
@@ -15,10 +15,10 @@ export function WeatherInfo({
   temperature,
 }: WeatherInfoProps) {
   return (
-    <StyledWeatherInfo>
-      <StyledDiv>{timePeriod}</StyledDiv>
-      <StyledDiv>{weatherCondition}</StyledDiv>
-      <StyledDiv>{temperature}&deg;</StyledDiv>
-    </StyledWeatherInfo>
+    <Styled.WeatherInfo>
+      <div>{timePeriod}</div>
+      <div>{weatherCondition}</div>
+      <div>{temperature}&deg;</div>
+    </Styled.WeatherInfo>
   );
 }

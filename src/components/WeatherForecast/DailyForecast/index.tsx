@@ -12,12 +12,12 @@ export function DailyForecast() {
   );
   return (
     <StyledForecastSection>
-      {daysWeather.map((item) => (
+      {daysWeather.map(({ weekDay, icon, weatherCondition, temperature }) => (
         <WeatherInfo
-          timePeriod={item.weekDay}
-          icon={item.icon}
-          weatherCondition={item.weatherCondition}
-          temperature={item.temperature}
+          timePeriod={weekDay}
+          icon={icon}
+          weatherCondition={weatherCondition}
+          temperature={temperature}
           key={nanoid()}
         />
       ))}
